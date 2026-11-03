@@ -1,0 +1,171 @@
+{
+  "name": "StockSmart - Weekly Report",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                5
+              ],
+              "triggerAtHour": 17
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "77c9fea9-3c76-4991-8ab4-dd807bbd30a3",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ad7765c6-aab3-421a-a685-6f724a0d3241",
+              "name": "inventory_data",
+              "value": "Current Inventory Data: \n[Bakery] Chocolate Cake - Stock: 2 (Selling fast, almost out of stock) \n[Bakery] Croissant - Stock: 15 (Normal sales) \n[Snacks] Potato Chips - Stock: 50 (Overstocked, poor recent sales) \n[Beverage] Orange Juice - Stock: 0 (Completely out of stock) \n[Beverage] Cola - Stock: 30 (Healthy stock level)",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "4721c572-890e-4073-be5f-c8c47040b925",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-3-flash-preview"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an expert Inventory Analyst for StockSmart. Based on the following weekly inventory data, please generate a professional, concise Weekly Inventory Report for the business owner. \n\nHere is the data:\n{{ $json.inventory_data }}\n\nPlease structure your report clearly with the following sections:\n1. \ud83d\udcca Executive Summary\n2. \u26a0\ufe0f Restock Recommendations (Urgent)\n3. \ud83d\udcc9 Overstock Warnings\n4. \ud83d\udca1 AI Business / Promotion Idea\n\nKeep the tone professional and action-oriented.\nIMPORTANT: Please output strictly in PLAIN TEXT. Do NOT use any Markdown formatting (no asterisks **, no underscores _, no hashes ###). Use only standard text, line breaks, and emojis to format the report."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "dd3aa34a-0b09-42ba-842c-5ed86ea2c002",
+      "name": "Message a model"
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_WITH_YOUR_TELEGRAM_CHAT_ID",
+        "text": "={{ $json.content.parts[0].text }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        768,
+        0
+      ],
+      "id": "c5f3181f-4881-4436-a8eb-23c1b32b0bdc",
+      "name": "Send a text message",
+      "webhookId": "b636c540-c21d-4aa4-8b0c-1f480a50aeff"
+    },
+    {
+      "parameters": {
+        "sendTo": "REPLACE_WITH_YOUR_EMAIL_OR_REMOVE_THIS_NODE",
+        "subject": "=\ud83d\udcca StockSmart: Weekly AI Inventory Report",
+        "message": "={{ $json.result.text.replace(/\\n/g, '<br>') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        976,
+        0
+      ],
+      "id": "97a595a8-7ddf-4125-8bf9-5729d8fcee84",
+      "name": "Send a message",
+      "webhookId": "652136f9-06da-4fb8-bf29-ffcb268f813b"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "dd103005-ee04-4ad4-8bc9-5bfcc463bef1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c0c7de105467778ca8700ff105256a987a1a6a98e9e8b729fd795974f8a35a70"
+  },
+  "nodeGroups": [],
+  "id": "q1lyQzRW76eJTAsh",
+  "tags": []
+}

@@ -1,0 +1,64 @@
+{
+  "name": "StockSmart - Low Stock Alert",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "low-stock-alert",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -208,
+        0
+      ],
+      "id": "f33c5bb8-a95c-4f87-ad54-e6ab1ea1ba29",
+      "name": "Webhook",
+      "webhookId": "66aab520-e4cf-4094-8aac-427554d58dfc"
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_WITH_YOUR_TELEGRAM_CHAT_ID",
+        "text": "=\ud83d\udea8 URGENT: Low Stock Alert! \n\ud83d\udce6 Product: {{ $json.query.product }} \n\u26a0\ufe0f Current Stock: {{ $json.query.stock }} units  Please log in to the Admin Panel and contact the supplier to restock immediately!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        0
+      ],
+      "id": "93aac061-1db7-48f5-8669-4398acc49b36",
+      "name": "Send a text message",
+      "webhookId": "d8404155-67c1-4d9f-8c20-605e774dc128"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a33c953b-9c41-4867-a688-f0ae4a0861c9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c0c7de105467778ca8700ff105256a987a1a6a98e9e8b729fd795974f8a35a70"
+  },
+  "nodeGroups": [],
+  "id": "GdiEs5D37ajFzf2p",
+  "tags": []
+}

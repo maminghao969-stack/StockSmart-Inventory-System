@@ -1,0 +1,6 @@
+{
+  "name": "AI Inventory Management Assistant",
+  "description": "An interactive dashboard and AI assistant that analyzes supermarket inventory data, detects low stock, duplicates, pricing errors, and category mismatches, and provides actionable recommendations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
