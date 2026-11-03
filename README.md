@@ -46,8 +46,7 @@ As a core developer of this collaborative project, my primary focus was on \*\*D
 ## How to Run Locally
 
 
-
-### 1. Web Application
+1. Web Application
 
 ```bash
 
@@ -59,7 +58,7 @@ Open http://localhost:3000 in your browser. By default, the app runs in demo mod
 
 
 
-2\. MySQL Database Setup
+2. MySQL Database Setup
 
 To use a live MySQL database, rename .env.example to .env and configure your credentials:
 
@@ -77,7 +76,7 @@ Ensure you have executed the stocksmart\_ai\_clean.sql script in your MySQL inst
 
 
 
-3\. n8n \& Telegram Automation setup
+3. n8n \& Telegram Automation setup
 
 The system includes a website-to-n8n bridge for automated alerts.
 
