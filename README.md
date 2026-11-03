@@ -1,4 +1,4 @@
-\# StockSmart - AI-Powered Inventory Automation System
+# StockSmart - AI-Powered Inventory Automation System
 
 
 
@@ -6,7 +6,7 @@ A full-stack inventory management and automation system designed to streamline b
 
 
 
-\## My Role \& Contributions
+## My Role \& Contributions
 
 As a core developer of this collaborative project, my primary focus was on \*\*Data Automation \& Backend Integration\*\*:
 
@@ -18,7 +18,7 @@ As a core developer of this collaborative project, my primary focus was on \*\*D
 
 
 
-\## Key Features
+## Key Features
 
 \- \*\*Real-Time Dashboard:\*\* Tracks total products, stock valuation, projected profit, and low-stock metrics.
 
@@ -30,7 +30,7 @@ As a core developer of this collaborative project, my primary focus was on \*\*D
 
 
 
-\## 🛠️ Tech Stack
+## Tech Stack
 
 \- \*\*Frontend/Backend:\*\* TypeScript, Node.js, Vite
 
@@ -43,12 +43,11 @@ As a core developer of this collaborative project, my primary focus was on \*\*D
 \---
 
 
-
-\## ⚙️ How to Run Locally
-
+## How to Run Locally
 
 
-\### 1. Web Application
+
+### 1. Web Application
 
 ```bash
 
